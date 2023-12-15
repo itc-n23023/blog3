@@ -1,9 +1,7 @@
+import Hero from 'components/hero'
+
 const Home = () => {
-  return (
-    <div>
-      <h1>CUBE</h1>
-      <p>アウトプットしていくサイト</p>
-    </div>
-  )
+  return <Hero title='CUBE' subtitle='アウトプットしていくサイト' imageOn />
 }
+
 export default Home
