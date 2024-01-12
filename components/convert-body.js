@@ -1,7 +1,7 @@
 import parse from 'html-react-parser'
 import Image from 'next/image'
 
-export default function ConvertBody ({ contentHTML }) {
+const ConvertBody = ({ contentHTML }) => {
   const contentReact = parse(contentHTML, {
     replace: node => {
       if (node.name === 'img') {
@@ -13,11 +13,12 @@ export default function ConvertBody ({ contentHTML }) {
             width={width}
             height={height}
             alt={alt}
-            sizes='(min-width: 768px) 768px, 100vm'
+            sizes='(min-width: 768px) 768px, 100vw'
           />
         )
       }
     }
   })
-  return <>{contentReact}</>
+  return <>{contentReact} </>
 }
+export default ConvertBody
