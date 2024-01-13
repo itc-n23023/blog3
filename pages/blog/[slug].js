@@ -7,8 +7,11 @@ export async function getStaticPaths () {
 
 export async function getStaticProps (context) {
   console.log('posts:', context.params)
+
   return {
-    props: { message: 'Dynamic Routes' },
+    props: {
+      message: 'Dynamic Routes'
+    },
     revalidate: 60
   }
 }
