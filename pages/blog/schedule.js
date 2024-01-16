@@ -72,7 +72,7 @@ export async function getStaticProps () {
   const eyecatch = post.eyecatch ?? eyecatchLocal
 
   const { base64 } = await getPlaiceholder(eyecatch.url)
-  eyecatch.blurDateURL = base64
+  eyecatch.blurDataURL = base64
 
   return {
     props: {
