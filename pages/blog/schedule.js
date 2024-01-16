@@ -9,6 +9,7 @@ import {
 } from 'components/two-column'
 import Image from 'next/image'
 import { getPlaiceholder } from 'plaiceholder'
+// ローカルの代替アイキャッチ画像
 import { eyecatchLocal } from 'lib/constants'
 import PostCategories from 'components/post-categories'
 import ConvertBody from 'components/convert-body'
@@ -44,7 +45,7 @@ const Schedule = ({
             sizes='(min-width: 1152px) 1152px, 100vw'
             priority
             placeholder='blur'
-            blurDataURL={eyecatch.blurDateURL}
+            blurDataURL={eyecatch.blurDataURL}
           />
         </figure>
 
