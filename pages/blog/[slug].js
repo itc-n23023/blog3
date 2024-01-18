@@ -12,6 +12,7 @@ import { getPlaiceholder } from 'plaiceholder'
 // ローカルの代替アイキャッチ画像
 import { eyecatchLocal } from 'lib/constants'
 import PostCategories from 'components/post-categories'
+import Pagination from 'components/pagination'
 import ConvertBody from 'components/convert-body'
 import { extractText } from 'lib/extract-text'
 import { prevNextPost } from 'lib/prev-next-post'
@@ -23,7 +24,9 @@ const Schedule = ({
   content,
   eyecatch,
   categories,
-  description
+  description,
+  prevPost,
+  nextPost
 }) => {
   return (
     <Container>
@@ -60,6 +63,19 @@ const Schedule = ({
             <PostCategories categories={categories} />
           </TwoColumnSidebar>
         </TwoColumn>
+
+        <Pagination
+          prevText={prevPost.title}
+          prevUrl={`/blog/${prevPost.slug}`}
+          nextText={nextPost.title}
+          nextUrl={`/blog/${nextPost.slug}`}
+        />
+        <div>
+          {prevPost.title} {prevPost.slug}
+        </div>
+        <div>
+          {nextPost.title} {nextPost.slug}
+        </div>
       </article>
     </Container>
   )
