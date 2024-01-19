@@ -52,7 +52,6 @@ const Post = ({
             blurDataURL={eyecatch.blurDataURL}
           />
         </figure>
-
         <TwoColumn>
           <TwoColumnMain>
             <PostBody>
@@ -73,6 +72,7 @@ const Post = ({
     </Container>
   )
 }
+
 export default Post
 
 export async function getStaticPaths () {
