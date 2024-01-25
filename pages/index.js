@@ -1,5 +1,5 @@
 const Home = () => {
-  return(
+  return (
     <>
       <header>HEADER</header>
 
@@ -7,9 +7,10 @@ const Home = () => {
         <div>
           <h1>CUBE</h1>
           <p>アウトプットしていくサイト</p>
-        </main>
+        </div>
+      </main>
 
-        <footer>FOOTER</footer>
+      <footer>FOOTER</footer>
     </>
   )
 }
