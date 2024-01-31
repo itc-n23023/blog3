@@ -1,7 +1,7 @@
-import Container from 'components/container'
 import Logo from 'components/logo'
 import Nav from 'components/nav'
 import styles from 'styles/header.module.css'
+import Container from 'components/container'
 
 const Header = () => {
   return (
@@ -15,5 +15,4 @@ const Header = () => {
     </header>
   )
 }
-
 export default Header

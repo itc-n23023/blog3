@@ -1,6 +1,10 @@
 import styles from 'styles/container.module.css'
 
-const Container = ({ children, large = false }) => {
-  return <div className={large ? styles.large : styles.default}>{children}</div>
+const Container = (props = { large: false }) => {
+  return (
+    <div className={props.large ? styles.large : styles.default}>
+      {props.children}
+    </div>
+  )
 }
 export default Container
