@@ -1,16 +1,13 @@
 import Header from 'components/header'
 import Footer from 'components/footer'
 
-const Layout = ({ children }) => {
+const Layout = props => {
   return (
     <>
       <Header />
-
-      <main>{children}</main>
-
+      <main>{props.children}</main>
       <Footer />
     </>
   )
 }
-
 export default Layout

@@ -5,7 +5,7 @@ import Meta from 'components/meta'
 const Blog = () => {
   return (
     <Container>
-      <Meta pageTitle='ブログ' pageDesc='ブログ記事一覧' />
+      <Meta pageTitle='ブログ' />
       <Hero title='Blog' subtitle='Recent Posts' />
     </Container>
   )

@@ -1,17 +1,15 @@
-import 'styles/globals.css'
 import Layout from 'components/layout'
+import 'styles/globals.css'
 
-// Font Awesome の設定
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
 config.autoAddCss = false
 
-function MyApp ({ Component, pageProps }) {
+const MyApp = props => {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <props.Component {...props.pageProps} />
     </Layout>
   )
 }
-
 export default MyApp

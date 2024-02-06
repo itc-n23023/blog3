@@ -1,6 +1,5 @@
-import Meta from 'components/meta'
-import Container from 'components/container'
 import Hero from 'components/hero'
+import Container from 'components/container'
 import PostBody from 'components/post-body'
 import Contact from 'components/contact'
 import {
@@ -10,6 +9,8 @@ import {
 } from 'components/two-column'
 import Image from 'next/image'
 import eyecatch from 'images/about.jpg'
+import Meta from 'components/meta'
+
 const About = () => {
   return (
     <Container>
@@ -52,6 +53,7 @@ const About = () => {
             </p>
           </PostBody>
         </TwoColumnMain>
+
         <TwoColumnSidebar>
           <Contact />
         </TwoColumnSidebar>
