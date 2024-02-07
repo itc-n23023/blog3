@@ -13,7 +13,11 @@ import PostCategories from 'components/post-categories'
 import Meta from 'components/meta'
 import { extractText } from 'lib/extract-text'
 
+<<<<<<< HEAD
 const Schedule = props => {
+=======
+const Schedule = ({ title, publish, content, eyecatch, categories }) => {
+>>>>>>> 4677602 (chapter8 css header.js naosi tukurinaosi)
   return (
     <Container>
       <Meta
@@ -59,8 +63,11 @@ export const getStaticProps = async () => {
   const slug = 'schedule'
 
   const post = await getPostBySlug(slug)
+<<<<<<< HEAD
 
   const description = extractText(post.content)
+=======
+>>>>>>> 4677602 (chapter8 css header.js naosi tukurinaosi)
   return {
     props: {
       title: post.title,
