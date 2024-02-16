@@ -9,10 +9,7 @@ import {
 } from 'components/two-column'
 import Image from 'next/image'
 import eyecatch from 'images/about.jpg'
-<<<<<<< HEAD
 import Meta from 'components/meta'
-=======
->>>>>>> 4677602 (chapter8 css header.js naosi tukurinaosi)
 
 const About = () => {
   return (

@@ -7,50 +7,51 @@ import {
   TwoColumnMain,
   TwoColumnSidebar
 } from 'components/two-column'
-import ConvertBody from 'components/convert-body'
 import Image from 'next/image'
 import PostCategories from 'components/post-categories'
-import Meta from 'components/meta'
+import ConvertBody from 'components/convert-body'
 import { extractText } from 'lib/extract-text'
+import Meta from 'components/meta'
 
-<<<<<<< HEAD
-const Schedule = props => {
-=======
-const Schedule = ({ title, publish, content, eyecatch, categories }) => {
->>>>>>> 4677602 (chapter8 css header.js naosi tukurinaosi)
+const Schedule = ({
+  title,
+  publish,
+  content,
+  eyecatch,
+  categories,
+  description
+}) => {
   return (
     <Container>
       <Meta
-        pageTitle={props.title}
-        pageDesc={props.description}
-        pageImg={props.eyecatch.url}
-        pageImgW={props.eyecatch.width}
-        pageImgH={props.eyecatch.height}
+        pageTitle={title}
+        pageDesc={description}
+        pageImg={eyecatch.url}
+        pageImgW={eyecatch.width}
+        pageImgH={eyecatch.height}
       />
       <article>
-        <PostHeader
-          title={props.title}
-          subtitle='Blog Article'
-          publish={props.publish}
-        />
+        <PostHeader title={title} subtitle='Blog Article' publish={publish} />
         <figure>
           <Image
-            src={props.eyecatch.url}
+            src={eyecatch.url}
             alt=''
             layout='responsive'
-            width={props.eyecatch.width}
-            height={props.eyecatch.height}
+            width={eyecatch.width}
+            height={eyecatch.height}
             sizes='(min-width: 1152px) 1152px, 100vw'
+            priority
           />
         </figure>
+
         <TwoColumn>
           <TwoColumnMain>
             <PostBody>
-              <ConvertBody contentHTML={props.content} />
+              <ConvertBody contentHTML={content} />
             </PostBody>
           </TwoColumnMain>
           <TwoColumnSidebar>
-            <PostCategories categories={props.categories} />
+            <PostCategories categories={categories} />
           </TwoColumnSidebar>
         </TwoColumn>
       </article>
@@ -59,15 +60,11 @@ const Schedule = ({ title, publish, content, eyecatch, categories }) => {
 }
 export default Schedule
 
-export const getStaticProps = async () => {
+export async function getStaticProps () {
   const slug = 'schedule'
 
   const post = await getPostBySlug(slug)
-<<<<<<< HEAD
-
   const description = extractText(post.content)
-=======
->>>>>>> 4677602 (chapter8 css header.js naosi tukurinaosi)
   return {
     props: {
       title: post.title,
