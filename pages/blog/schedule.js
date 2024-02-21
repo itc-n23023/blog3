@@ -1,4 +1,6 @@
 import { getPostBySlug } from 'lib/api'
+import { extractText } from 'lib/extract-text'
+import Meta from 'components/meta'
 import Container from 'components/container'
 import PostHeader from 'components/post-header'
 import PostBody from 'components/post-body'
@@ -7,20 +9,21 @@ import {
   TwoColumnMain,
   TwoColumnSidebar
 } from 'components/two-column'
-import Image from 'next/image'
-import PostCategories from 'components/post-categories'
 import ConvertBody from 'components/convert-body'
-import { extractText } from 'lib/extract-text'
-import Meta from 'components/meta'
+import PostCategories from 'components/post-categories'
+import Image from 'next/image'
+import { getPlaiceholder } from 'plaiceholder'
 
-const Schedule = ({
+import { eyecatchLocal } from 'lib/constants'
+
+export default function Schedule ({
   title,
   publish,
   content,
   eyecatch,
   categories,
   description
-}) => {
+}) {
   return (
     <Container>
       <Meta
@@ -41,6 +44,8 @@ const Schedule = ({
             height={eyecatch.height}
             sizes='(min-width: 1152px) 1152px, 100vw'
             priority
+            placeholder='blur'
+            blurDateURL={eyecatch.blurDateURL}
           />
         </figure>
 
@@ -58,19 +63,25 @@ const Schedule = ({
     </Container>
   )
 }
-export default Schedule
 
 export async function getStaticProps () {
-  const slug = 'schedule'
+  const slug = 'micro'
 
   const post = await getPostBySlug(slug)
+
   const description = extractText(post.content)
+
+  const eyecatch = post.eyecatch ?? eyecatchLocal
+
+  const { base64 } = await getPlaiceholder(eyecatch.url)
+  eyecatch.blurDataURL = base64
+
   return {
     props: {
       title: post.title,
       publish: post.publishDate,
       content: post.content,
-      eyecatch: post.eyecatch,
+      eyecatch: eyecatch,
       categories: post.categories,
       description: description
     }
