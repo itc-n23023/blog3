@@ -6,17 +6,17 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 
-export default function Pagination ({
+const Pagination = ({
   prevText = '',
   prevUrl = '',
   nextText = '',
   nextUrl = ''
-}) {
+}) => {
   return (
     <ul className={styles.flexContainer}>
       {prevText && prevUrl && (
         <li className={styles.prev}>
-          <Link href={prevUrl}>
+          <Link href={prevUrl} className={styles.iconText}>
             <FontAwesomeIcon icon={faChevronLeft} color='var(--gray-25)' />
             <span>{prevText}</span>
           </Link>
@@ -24,7 +24,7 @@ export default function Pagination ({
       )}
       {nextText && nextUrl && (
         <li className={styles.next}>
-          <Link href={nextUrl}>
+          <Link href={nextUrl} className={styles.iconText}>
             <span>{nextText}</span>
             <FontAwesomeIcon icon={faChevronRight} color='var(--gray-25)' />
           </Link>
@@ -33,3 +33,4 @@ export default function Pagination ({
     </ul>
   )
 }
+export default Pagination
