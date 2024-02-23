@@ -1,7 +1,4 @@
 import { getPostBySlug, getAllSlugs } from 'lib/api'
-import { extractText } from 'lib/extract-text'
-import { prevNextPost } from 'lib/prev-next-post'
-import Meta from 'components/meta'
 import Container from 'components/container'
 import PostHeader from 'components/post-header'
 import PostBody from 'components/post-body'
@@ -11,93 +8,87 @@ import {
   TwoColumnSidebar
 } from 'components/two-column'
 import ConvertBody from 'components/convert-body'
-import PostCategories from 'components/post-categories'
-import Pagination from 'components/pagination'
 import Image from 'next/image'
-import { getPlaiceholder } from 'plaiceholder'
+import PostCategories from 'components/post-categories'
+import Meta from 'components/meta'
+import { extractText } from 'lib/extract-text'
 import { eyecatchLocal } from 'lib/constants'
-import { getImageBuffer } from 'lib/getImageBuffer'
+import { getPlaiceholder } from 'plaiceholder'
+import { prevNextPost } from 'lib/prev-next-post'
+import Pagination from 'components/pagination'
 
-export default function Post ({
-  title,
-  publish,
-  content,
-  eyecatch,
-  categories,
-  description,
-  prevPost,
-  nextPost
-}) {
+const Post = props => {
   return (
     <Container>
       <Meta
-        pageTitle={title}
-        pageDesc={description}
-        pageImg={eyecatch.url}
-        pageImgW={eyecatch.width}
-        pageImgH={eyecatch.height}
+        pageTitle={props.title}
+        pageDesc={props.description}
+        pageImg={props.eyecatch.url}
+        pageImgW={props.eyecatch.width}
+        pageImgH={props.eyecatch.height}
       />
       <article>
-        <PostHeader title={title} subtitle='Blog Article' publish={publish} />
+        <PostHeader
+          title={props.title}
+          subtitle='Blog Article'
+          publish={props.publish}
+        />
         <figure>
           <Image
-            key={eyecatch.url}
-            src={eyecatch.url}
+            key={props.eyecatch.url}
+            src={props.eyecatch.url}
             alt=''
             layout='responsive'
-            width={eyecatch.width}
-            height={eyecatch.height}
+            width={props.eyecatch.width}
+            height={props.eyecatch.height}
             sizes='(min-width: 1152px) 1152px, 100vw'
             priority
+            placeholder='blur'
+            blurDataURL={props.eyecatch.blurDataURL}
           />
         </figure>
-
         <TwoColumn>
           <TwoColumnMain>
             <PostBody>
-              <ConvertBody contentHTML={content} />
+              <ConvertBody contentHTML={props.content} />
             </PostBody>
           </TwoColumnMain>
           <TwoColumnSidebar>
-            <PostCategories categories={categories} />
+            <PostCategories categories={props.categories} />
           </TwoColumnSidebar>
         </TwoColumn>
         <Pagination
-          prevText={prevPost.title}
-          prevUrl={`/blog/${prevPost.slug}`}
-          nextText={nextPost.title}
-          nextUrl={`/blog/${nextPost.slug}`}
+          prevText={props.prevPost.title}
+          prevUrl={`/blog/${props.prevPost.slug}`}
+          nextText={props.nextPost.title}
+          nextUrl={`/blog/${props.nextPos.slug}`}
         />
       </article>
     </Container>
   )
 }
+export default Post
 
-export async function getStaticPaths () {
+export const getStaticPaths = async () => {
   const allSlugs = await getAllSlugs()
-
   return {
     paths: allSlugs.map(({ slug }) => `/blog/${slug}`),
     fallback: false
   }
 }
 
-export async function getStaticProps (context) {
+export const getStaticProps = async context => {
   const slug = context.params.slug
-
   const post = await getPostBySlug(slug)
 
   const description = extractText(post.content)
-
   const eyecatch = post.eyecatch ?? eyecatchLocal
 
-  const imageBuffer = await getImageBuffer(eyecatch.url)
-  const { base64 } = await getPlaiceholder(imageBuffer)
+  const { base64 } = await getPlaiceholder(eyecatch.url)
   eyecatch.blurDataURL = base64
 
   const allSlugs = await getAllSlugs()
   const [prevPost, nextPost] = prevNextPost(allSlugs, slug)
-
   return {
     props: {
       title: post.title,
